@@ -12,11 +12,12 @@ import Education from "./sections/Education";
 import Contact from "./sections/Contact";
 import Stats from "./sections/Stats";
 
-import Welcome from "./sections/Welcome"; // 👈
+import Welcome from "./sections/Welcome";
+import NotFound from "./sections/NotFound";
 
 function App() {
   const location = useLocation();
-  const isWelcome = location.pathname === "/"; // 👈 check current route
+  const isWelcome = location.pathname === "/" || location.pathname === "/portfolio/";
 
   return (
     <div className="font-sans bg-white dark:bg-black text-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
@@ -39,6 +40,9 @@ function App() {
             <Route path="/education" element={<Education />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/stats" element={<Stats />} />
+            
+            {/* 👇 Catch-all for undefined routes */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
       </div>
