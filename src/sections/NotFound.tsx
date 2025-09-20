@@ -37,5 +37,5 @@ export default function NotFound() {
     return () => clearTimeout(timer);
   }, [navigate]);
 
-  return <TypingText text="404 PAGE NOT FOUND" />;
+  return <TypingText text="4004 PAGE NOT FOUND" />;
 }

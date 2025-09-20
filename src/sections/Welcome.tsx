@@ -37,5 +37,5 @@ export default function Welcome() {
     return () => clearTimeout(timer);
   }, [navigate]);
 
-  return <TypingText text="WELCOME" />;
+  return <TypingText text="WEELCOME" />;
 }
