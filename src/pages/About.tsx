@@ -1,7 +1,15 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import type { RootState } from "../store/store";
+import Loader from "../components/Loader";
 
 export default function About() {
+  const { data, loading, error } = useSelector((state: RootState) => state.portfolio);
+
+  if (loading) return <Loader />;
+  if (error) return <p className="text-red-500 text-center mt-10">Error: {error}</p>;
+  if (!data) return null;
   return (
     <section
       id="about"
@@ -14,7 +22,7 @@ export default function About() {
         transition={{ duration: 0.6 }}
         className="text-4xl font-bold mb-2 text-gray-900 dark:text-white text-left"
       >
-        About Mohamed
+        {data.about.title}
       </motion.h2>
 
       <motion.h3
@@ -23,7 +31,7 @@ export default function About() {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="text-2xl font-semibold text-primary mb-8 text-left"
       >
-        More than just a title—let’s dive deeper!
+        {data.about.slogan}
       </motion.h3>
 
       {/* Content */}
@@ -33,30 +41,12 @@ export default function About() {
         transition={{ duration: 1, delay: 0.4 }}
         className="space-y-6 text-lg text-gray-700 dark:text-gray-300 leading-relaxed text-left"
       >
-        <p>
-          I’m <span className="font-semibold text-primary">Mohamed Hanifa</span>, a
-          passionate Full Stack Software Engineer with{" "}
-          <strong>4.8 years</strong> of experience building enterprise-grade
-          applications. My expertise lies in{" "}
-          <span className="font-medium">.NET 8, GraphQL, and Microservices</span>,
-          alongside strong frontend proficiency in Angular and React.js.
-        </p>
-
-        <p>
-          With a strong foundation in software architecture and design patterns, I
-          focus on creating{" "}
-          <span className="italic">scalable, secure, and efficient</span> solutions.
-          I’ve contributed to <span className="italic">FinTech</span> and{" "}
-          <span className="italic">Travel Tech</span> platforms, optimized SQL
-          queries for performance, and mentored junior developers in best
-          practices.
-        </p>
-
-        <p>
-          Beyond coding, I thrive in collaborative environments and enjoy solving
-          real-world challenges with creative solutions. My mission is to craft
-          impactful products that make a difference in people’s lives.
-        </p>
+        {data.about.summaries.map((t, i) => (
+          <p key={i}
+          >
+            {t}
+          </p>
+        ))}
       </motion.div>
 
       {/* Navigation links */}

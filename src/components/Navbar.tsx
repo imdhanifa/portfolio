@@ -1,8 +1,8 @@
 import { useTheme } from "../context/ThemeContext";
 import { Sun, Moon, Github } from "lucide-react";
-import { CommandMenu } from "./CommandMenu";
+import { CommandMenu } from "./command/CommandMenu";
 import { Link, useLocation } from "react-router-dom";
-import Resume from "../assets/Mohamed_Hanifa_Software_Developer_Resume.pdf";
+
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
@@ -31,14 +31,6 @@ export default function Navbar() {
           >
             Blog
           </Link>
-          <a
-            href={Resume}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-blue-600"
-          >
-            Resume
-          </a>
         </div>
       </div>
 

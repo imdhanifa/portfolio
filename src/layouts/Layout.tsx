@@ -8,13 +8,11 @@ export default function Layout() {
     <div className="font-sans bg-white dark:bg-black text-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
       <Navbar />
       <Sidebar />
-
       <div className="flex-1 flex">
         <main className="w-full md:ml-64 pt-14 pb-16 px-6">
           <Outlet />
         </main>
       </div>
-
       <Footer />
     </div>
   );

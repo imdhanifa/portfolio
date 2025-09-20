@@ -16,11 +16,13 @@
     "@radix-ui/react-dialog": "^1.1.15",
     "@react-three/drei": "^10.7.6",
     "@react-three/fiber": "^9.3.0",
+    "@reduxjs/toolkit": "^2.9.0",
     "framer-motion": "^12.23.15",
     "lucide-react": "^0.544.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-github-calendar": "^4.5.10",
+    "react-redux": "^9.2.0",
     "react-router-dom": "^7.9.1",
     "three": "^0.180.0"
   },

@@ -1,10 +1,17 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSelector } from "react-redux";
+import type { RootState } from "../store/store";
+import Loader from "../components/Loader";
 
 export default function Contact() {
   const [tab, setTab] = useState<"form" | "details">("form");
+  const { data, loading, error } = useSelector((state: RootState) => state.portfolio);
 
+  if (loading) return <Loader />;
+  if (error) return <p className="text-red-500 text-center mt-10">Error: {error}</p>;
+  if (!data) return null;
   return (
     <section
       id="contact"
@@ -38,21 +45,19 @@ export default function Contact() {
       >
         <button
           onClick={() => setTab("form")}
-          className={`px-4 py-2 text-sm font-medium ${
-            tab === "form"
-              ? "border-b-2 border-primary text-primary"
-              : "text-gray-500 dark:text-gray-400"
-          }`}
+          className={`px-4 py-2 text-sm font-medium ${tab === "form"
+            ? "border-b-2 border-primary text-primary"
+            : "text-gray-500 dark:text-gray-400"
+            }`}
         >
           Form
         </button>
         <button
           onClick={() => setTab("details")}
-          className={`px-4 py-2 text-sm font-medium ${
-            tab === "details"
-              ? "border-b-2 border-primary text-primary"
-              : "text-gray-500 dark:text-gray-400"
-          }`}
+          className={`px-4 py-2 text-sm font-medium ${tab === "details"
+            ? "border-b-2 border-primary text-primary"
+            : "text-gray-500 dark:text-gray-400"
+            }`}
         >
           Details
         </button>
@@ -140,21 +145,30 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
             className="text-left space-y-4 text-gray-700 dark:text-gray-300"
           >
-            <p>📍 Ramanathapuram, India</p>
+            <p>{data.contact.location}</p>
             <p>
-              📧{" "}
               <a
-                href="mailto:imdhanifa@outlook.com"
+                type="email"
+                href={`mailto:${data.contact.email}`}
                 className="text-primary font-medium hover:underline"
               >
-                imdhanifa@outlook.com
+                {data.contact.email}
               </a>
             </p>
-            <p>📞 +91 90038 94244</p>
+            <p>
+              <a
+                type="tel"
+                href={`tel:${data.contact.phone}`}
+                className="text-primary font-medium hover:underline"
+              >
+                {data.contact.phone}
+              </a>
+            </p>
 
             <div className="flex gap-6">
               <a
-                href="https://github.com/imdhanifa"
+                type="url"
+                href={data.contact.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:underline transition"
@@ -162,7 +176,8 @@ export default function Contact() {
                 GitHub
               </a>
               <a
-                href="https://linkedin.com/in/imdhanifa"
+                type="url"
+                href={data.contact.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:underline transition"

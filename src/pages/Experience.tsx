@@ -1,34 +1,15 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-
-const jobs = [
-  {
-    role: "Software Developer",
-    company: "Knila IT Solutions India Pvt Ltd",
-    period: "Dec 2022 – Present | Coimbatore",
-    tasks: [
-      "Developed Deluxe Payment Platform with .NET 8, GraphQL, and JWT authentication.",
-      "Architected microservices to improve scalability and modularity.",
-      "Built responsive dashboards with Angular & React.js for transaction tracking.",
-      "Optimized SQL queries, improving performance by 30%.",
-      "Mentored junior developers and enforced best practices.",
-    ],
-    latest: true,
-  },
-  {
-    role: "Software Developer",
-    company: "Tripwerkz India Pvt Ltd",
-    period: "Jan 2021 – Nov 2022 | Chennai",
-    tasks: [
-      "Developed microservices-based applications for a global travel platform.",
-      "Built REST APIs & frontend modules in React.js for bookings & payments.",
-      "Integrated APIs from TBO Holidays and Hotelbeds.",
-      "Improved maintainability with EF Core and modular architecture.",
-    ],
-  },
-];
+import { useSelector } from "react-redux";
+import type { RootState } from "../store/store";
+import Loader from "../components/Loader";
 
 export default function Experience() {
+  const { data, loading, error } = useSelector((state: RootState) => state.portfolio);
+
+  if (loading) return <Loader />;
+  if (error) return <p className="text-red-500 text-center mt-10">Error: {error}</p>;
+  if (!data) return null;
   return (
     <section
       id="experience"
@@ -77,7 +58,7 @@ export default function Experience() {
           visible: { transition: { staggerChildren: 0.25 } },
         }}
       >
-        {jobs.map((job, index) => (
+        {data.experience.map((job, index) => (
           <motion.div
             key={index}
             variants={{
@@ -100,7 +81,7 @@ export default function Experience() {
             {/* Job Content */}
             <div className="flex flex-col">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                {job.role} – {job.company}
+                {job.role} – {job.organization}
                 {job.latest && (
                   <span className="bg-primary text-white text-xs font-medium px-2 py-1 rounded-md">
                     Latest

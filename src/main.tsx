@@ -1,17 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 import App from "./App";
 import "./index.css";
 import { ThemeProvider } from "./context/ThemeContext";
 import { BrowserRouter } from "react-router-dom";
 
 // ✅ Mount React app
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter basename="/portfolio">
+    <Provider store={store}>
       <ThemeProvider>
-        <App />
+        <BrowserRouter basename="/portfolio">
+          <App />
+        </BrowserRouter>
       </ThemeProvider>
-    </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );

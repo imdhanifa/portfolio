@@ -3,7 +3,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import GitHubCalendar from "react-github-calendar";
 import { motion } from "framer-motion";
-
+import { useSelector } from "react-redux";
+import type { RootState } from "../store/store";
+import useFetch from "../hooks/useFetch";
+import type { GitHubStats } from "../@types/github";
 // ---------------- CONFIG ----------------
 const GITHUB_USERNAME = "imdhanifa"; // your GitHub username
 
@@ -97,34 +100,27 @@ function StatCard({
 
 // ---------------- Main Stats Page ----------------
 export default function Stats() {
-  const [stats, setStats] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+  const { data: portfolio, loading: portfolioLoading, error: portfolioError } =
+  useSelector((state: RootState) => state.portfolio);
+const { data: stats, loading, error } = useFetch<GitHubStats>(
+  portfolio?.githubProfile ?? ""
+);
 
-  // Fetch GitHub profile stats
-  useEffect(() => {
-    async function fetchStats() {
-      try {
-        const res = await fetch(
-          `https://api.github.com/users/${GITHUB_USERNAME}`
-        );
-        if (!res.ok) throw new Error("GitHub API request failed");
-        const data = await res.json();
-        setStats({
-          company: data.company,
-          public_repos: data.public_repos,
-          followers: data.followers,
-          following: data.following,
-          location: data.location,
-          hireable: data.hireable,
-        });
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchStats();
-  }, []);
+if (portfolioLoading) {
+  return <p className="text-center mt-10">Loading...</p>;
+}
+
+if (portfolioError) {
+  return (
+    <p className="text-red-500 text-center mt-10">
+      Error: {portfolioError}
+    </p>
+  );
+}
+
+if (!portfolio || error) {
+  return null; // still waiting for portfolio data
+}
 
   return (
     <section

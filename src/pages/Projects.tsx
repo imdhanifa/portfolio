@@ -1,25 +1,16 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import type { RootState } from "../store/store";
+import Loader from "../components/Loader";
 
-const projects = [
-  {
-    title: "Deluxe Payment Platform | Knila IT Solutions",
-    desc: "A secure payment processing platform with PCI-compliant Hosted Payment Forms, recurring payments, and digital wallet integration.",
-    link: "https://www.deluxe.com",
-  },
-  {
-    title: "Tripwerkz (Travel Tech) | Tripwerkz India Pvt Ltd",
-    desc: "A global travel booking platform offering hotels, flights, tours, and events. Integrated APIs from TBO Holidays and Hotelbeds.",
-    link: "https://tripwerkz.com",
-  },
-  {
-    title: "Open Source Projects | GitHub",
-    desc: "React-TS-Advanced, Angular MFE, GraphQL API, FastEndpoints Minimal API, and more.",
-    link: "https://github.com/imdhanifa",
-  },
-];
 
 export default function Projects() {
+    const { data, loading, error } = useSelector((state: RootState) => state.portfolio);
+
+  if (loading) return <Loader />;
+  if (error) return <p className="text-red-500 text-center mt-10">Error: {error}</p>;
+  if (!data) return null;
   return (
     <section
       id="projects"
@@ -58,7 +49,7 @@ export default function Projects() {
           },
         }}
       >
-        {projects.map((p) => (
+        {data.projects.map((p) => (
           <motion.div
             key={p.title}
             variants={{
@@ -76,7 +67,7 @@ export default function Projects() {
 
             {/* Description */}
             <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
-              {p.desc}
+              {p.description}
             </p>
 
             {/* Link */}

@@ -1,32 +1,16 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import type { RootState } from "../store/store";
+import Loader from "../components/Loader";
 
-const education = [
-  {
-    degree: "Diploma in Computer Engineering",
-    school: "Mohamed Sathak Polytechnic College",
-    period: "2016 – 2019",
-    description:
-      "Completed diploma studies in Computer Engineering, building strong foundations in programming, databases, and networking.",
-    latest: true,
-  },
-  {
-    degree: "Higher Secondary Schooling",
-    school: "Govt Higher Secondary School",
-    period: "2014 – 2016",
-    description:
-      "Specialized in Computer Science during higher secondary, gaining exposure to mathematics, physics, and computing basics.",
-  },
-  {
-    degree: "Secondary Education (SSLC)",
-    school: "Govt High School",
-    period: "2013 – 2014",
-    description:
-      "Completed foundational education focusing on core subjects with an early interest in technology.",
-  },
-];
 
 export default function Education() {
+  const { data, loading, error } = useSelector((state: RootState) => state.portfolio);
+
+  if (loading) return <Loader />;
+  if (error) return <p className="text-red-500 text-center mt-10">Error: {error}</p>;
+  if (!data) return null;
   return (
     <section id="education" className="flex flex-col justify-center px-6 w-full max-w-6xl mx-auto py-16">
       {/* Heading */}
@@ -59,7 +43,7 @@ export default function Education() {
           visible: { transition: { staggerChildren: 0.25 } },
         }}
       >
-        {education.map((edu, index) => (
+        {data.education.map((edu, index) => (
           <motion.div
             key={index}
             variants={{
@@ -84,7 +68,7 @@ export default function Education() {
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
                 {edu.degree} ·{" "}
                 <span className="font-normal text-gray-700 dark:text-gray-300">
-                  {edu.school}
+                  {edu.institution}
                 </span>
                 {edu.latest && (
                   <span className="ml-2 px-2 py-0.5 text-xs rounded-md bg-blue-600 text-white">

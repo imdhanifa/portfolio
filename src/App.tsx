@@ -1,29 +1,39 @@
+import { lazy, Suspense, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "./store/store";
+import { fetchPortfolio } from "./store/portfolioSlice";
 
-// ✅ Lazy load Welcome + NotFound
-const Welcome = lazy(() => import("./sections/Welcome"));
-const NotFound = lazy(() => import("./sections/NotFound"));
-
-// Other pages (can also lazy-load if needed)
-import Introduction from "./sections/Introduction";
-import About from "./sections/About";
-import Projects from "./sections/Projects";
-import Skills from "./sections/Skills";
-import Experience from "./sections/Experience";
-import Education from "./sections/Education";
-import Contact from "./sections/Contact";
-import Stats from "./sections/Stats";
-
+// Layout (can also lazy-load if needed)
 import Layout from "./layouts/Layout";
+import Loader from "./components/Loader";
+
+
+// Lazy load Welcome + NotFound
+const Welcome = lazy(() => import("./pages/Welcome"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const Introduction = lazy(() => import("./pages/Introduction"));
+const About = lazy(() => import("./pages/About"));
+const Projects = lazy(() => import("./pages/Projects"));
+const Skills = lazy(() => import("./pages/Skills"));
+const Experience = lazy(() => import("./pages/Experience"));
+const Education = lazy(() => import("./pages/Education"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Stats = lazy(() => import("./pages/Stats"));
+
+
 
 export default function App() {
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchPortfolio());
+  }, []);
+
   return (
     <Suspense
       fallback={
-        <div className="flex items-center justify-center h-screen text-purple-500 font-mono text-xl">
-          Loading...
-        </div>
+        <Loader />
       }
     >
       <Routes>
@@ -33,7 +43,7 @@ export default function App() {
 
         {/* 404 also inside layout */}
         <Route path="*" element={<NotFound />} />
-        
+
         {/* Portfolio pages with layout */}
         <Route element={<Layout />}>
           <Route path="/introduction" element={<Introduction />} />

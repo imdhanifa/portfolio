@@ -1,5 +1,3 @@
-import Resume from "../assets/Mohamed_Hanifa_Software_Developer_Resume.pdf";
-
 export default function Footer() {
   return (
     <footer
@@ -13,34 +11,10 @@ export default function Footer() {
         z-50
       "
     >
-      <div className="flex flex-col md:flex-row items-center justify-between gap-2">
-        {/* Left: Copy */}
+      <div className="flex flex-col md:flex-row items-center justify-center gap-2">
         <p className="text-center md:text-left">
           © {new Date().getFullYear()} Mohamed Hanifa. All rights reserved.
         </p>
-
-        {/* Right: Links */}
-        <div className="flex gap-4 text-center md:text-right">
-          <a
-            href="https://github.com/imdhanifa"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-primary transition"
-          >
-            GitHub
-          </a>
-          <a
-            href={Resume}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-primary transition"
-          >
-            Resume
-          </a>
-          <a href="/contact" className="hover:text-primary transition">
-            Contact
-          </a>
-        </div>
       </div>
     </footer>
   );

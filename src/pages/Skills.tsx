@@ -1,25 +1,18 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-
-const skills = {
-  Programming: ["C#", "TypeScript", "JavaScript", "SQL", "HTML5", "CSS3", "SCSS"],
-  Backend: [
-    ".NET 8",
-    "ASP.NET Core",
-    "REST APIs",
-    "GraphQL",
-    "EF Core",
-    "Dapper",
-    "ADO.NET",
-    "FastEndpoints",
-  ],
-  Frontend: ["Angular", "React.js", "Bootstrap", "Responsive UI", "UI Theming"],
-  Databases: ["SQL Server", "MySQL", "PostgreSQL"],
-  "DevOps & Tools": ["Azure DevOps", "Jira", "Git", "Docker (basics)", "Postman"],
-  Architecture: ["Microservices", "MVC", "Clean Architecture", "CQRS", "Micro Frontends", "MCP"],
-};
+import { useSelector } from "react-redux";
+import type { RootState } from "../store/store";
+import Loader from "../components/Loader";
+import { formatCategory } from "../utils/formatCategory";
 
 export default function Skills() {
+  const { data, loading, error } = useSelector((state: RootState) => state.portfolio);
+
+  if (loading) return <Loader />;
+  if (error) return <p className="text-red-500 text-center mt-10">Error: {error}</p>;
+  if (!data) return null;
+  
+
   return (
     <section
       id="skills"
@@ -70,7 +63,7 @@ export default function Skills() {
           },
         }}
       >
-        {Object.entries(skills).map(([category, list]) => (
+        {Object.entries(data.skills).map(([category, list]) => (
           <motion.div
             key={category}
             variants={{
@@ -82,14 +75,14 @@ export default function Skills() {
           >
             {/* Category Title */}
             <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
-              {category}
+              {formatCategory(category)}
             </h3>
 
             {/* Skill tags */}
             <div className="flex flex-wrap gap-3">
-              {list.map((item) => (
+              {list.map((item: string, i: number) => (
                 <motion.span
-                  key={item}
+                  key={i}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   className="px-4 py-2 text-sm rounded-md 
