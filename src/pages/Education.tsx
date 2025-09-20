@@ -12,7 +12,10 @@ export default function Education() {
   if (error) return <p className="text-red-500 text-center mt-10">Error: {error}</p>;
   if (!data) return null;
   return (
-    <section id="education" className="flex flex-col justify-center px-6 w-full max-w-6xl mx-auto py-16">
+    <section
+      id="education"
+      className="flex flex-col justify-center px-6 w-full max-w-6xl mx-auto py-16"
+    >
       {/* Heading */}
       <motion.h2
         initial={{ opacity: 0, y: -30 }}

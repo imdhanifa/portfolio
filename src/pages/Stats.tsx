@@ -40,7 +40,7 @@ function GitHubGraphs() {
             data.filter(
               (d) =>
                 new Date(d.date) >=
-                new Date(new Date().setMonth(new Date().getMonth() - 3))
+                new Date(new Date().setMonth(new Date().getMonth() - 2))
             )
           }
           hideColorLegend
@@ -60,6 +60,13 @@ function GitHubGraphs() {
       >
         <GitHubCalendar
           username={GITHUB_USERNAME}
+          transformData={(data: any[]) =>
+            data.filter(
+              (d) =>
+                new Date(d.date) >=
+                new Date(new Date().setMonth(new Date().getMonth() - 6))
+            )
+          }
           hideColorLegend={false}
           showWeekdayLabels
           blockMargin={6}
@@ -101,26 +108,26 @@ function StatCard({
 // ---------------- Main Stats Page ----------------
 export default function Stats() {
   const { data: portfolio, loading: portfolioLoading, error: portfolioError } =
-  useSelector((state: RootState) => state.portfolio);
-const { data: stats, loading, error } = useFetch<GitHubStats>(
-  portfolio?.githubProfile ?? ""
-);
-
-if (portfolioLoading) {
-  return <p className="text-center mt-10">Loading...</p>;
-}
-
-if (portfolioError) {
-  return (
-    <p className="text-red-500 text-center mt-10">
-      Error: {portfolioError}
-    </p>
+    useSelector((state: RootState) => state.portfolio);
+  const { data: stats, loading, error } = useFetch<GitHubStats>(
+    portfolio?.githubProfile ?? ""
   );
-}
 
-if (!portfolio || error) {
-  return null; // still waiting for portfolio data
-}
+  if (portfolioLoading) {
+    return <p className="text-center mt-10">Loading...</p>;
+  }
+
+  if (portfolioError) {
+    return (
+      <p className="text-red-500 text-center mt-10">
+        Error: {portfolioError}
+      </p>
+    );
+  }
+
+  if (!portfolio || error) {
+    return null; // still waiting for portfolio data
+  }
 
   return (
     <section
@@ -132,23 +139,26 @@ if (!portfolio || error) {
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
-        className="text-4xl font-bold mb-2 text-gray-900 dark:text-white"
+        className="text-4xl font-bold text-left mb-2 text-gray-900 dark:text-white"
       >
         GitHub Stats
       </motion.h2>
 
-      <motion.p
+      <motion.h3
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="text-lg text-gray-600 dark:text-gray-400 mb-10"
+        className="text-2xl font-semibold text-primary mb-6"
       >
         Insights and metrics about my GitHub profile
-      </motion.p>
+      </motion.h3>
 
       {/* Contributions Graph */}
-      <div className="mb-12 mx-auto">
-        <GitHubGraphs />
+      <div className="mb-12 mx-auto max-w-5xl">
+        <div className="rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 
+                       p-6 shadow-sm hover:shadow-md transition">
+          <GitHubGraphs />
+        </div>
       </div>
 
       {/* Profile Stats */}
@@ -163,7 +173,7 @@ if (!portfolio || error) {
         </motion.p>
       ) : stats ? (
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto"
           initial="hidden"
           animate="visible"
           variants={{

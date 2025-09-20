@@ -23,7 +23,7 @@ export default function Skills() {
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
-        className="text-4xl font-bold text-left w-full mb-2 text-gray-900 dark:text-white"
+        className="text-4xl font-bold text-left mb-2 text-gray-900 dark:text-white"
       >
         Skills & Tools
       </motion.h2>
@@ -32,7 +32,7 @@ export default function Skills() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="text-2xl font-semibold text-primary text-left w-full mb-6"
+        className="text-2xl font-semibold text-primary mb-6"
       >
         Learned by coding all night and debugging all day!
       </motion.h3>

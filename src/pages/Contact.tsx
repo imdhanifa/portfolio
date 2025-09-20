@@ -22,19 +22,19 @@ export default function Contact() {
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
-        className="text-4xl font-bold mb-2 text-gray-900 dark:text-white"
+        className="text-4xl font-bold text-left mb-2 text-gray-900 dark:text-white"
       >
         Contact
       </motion.h2>
 
-      <motion.p
+      <motion.h3
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="text-2xl font-semibold mb-8 text-gray-600 dark:text-gray-400"
+        className="text-2xl font-semibold text-primary mb-6"
       >
         Get in touch before I write another line of code!
-      </motion.p>
+      </motion.h3>
 
       {/* Tabs */}
       <motion.div

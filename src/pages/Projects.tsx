@@ -6,7 +6,7 @@ import Loader from "../components/Loader";
 
 
 export default function Projects() {
-    const { data, loading, error } = useSelector((state: RootState) => state.portfolio);
+  const { data, loading, error } = useSelector((state: RootState) => state.portfolio);
 
   if (loading) return <Loader />;
   if (error) return <p className="text-red-500 text-center mt-10">Error: {error}</p>;
@@ -21,7 +21,7 @@ export default function Projects() {
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
-        className="text-4xl font-bold text-left text-gray-900 dark:text-white"
+        className="text-4xl font-bold text-left mb-2 text-gray-900 dark:text-white"
       >
         Projects
       </motion.h2>
@@ -30,7 +30,7 @@ export default function Projects() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="text-2xl font-semibold text-primary mb-12 text-left"
+        className="text-2xl font-semibold text-primary mb-6"
       >
         A lot of ideas, but some are still under construction!
       </motion.h3>
