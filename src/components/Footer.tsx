@@ -1,3 +1,5 @@
+import Resume from "../assets/Mohamed_Hanifa_Software_Developer_Resume.pdf";
+
 export default function Footer() {
   return (
     <footer
@@ -28,7 +30,7 @@ export default function Footer() {
             GitHub
           </a>
           <a
-            href="/resume.pdf"
+            href={Resume}
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-primary transition"

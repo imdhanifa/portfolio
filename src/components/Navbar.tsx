@@ -2,6 +2,7 @@ import { useTheme } from "../context/ThemeContext";
 import { Sun, Moon, Github } from "lucide-react";
 import { CommandMenu } from "./CommandMenu";
 import { Link, useLocation } from "react-router-dom";
+import Resume from "../assets/Mohamed_Hanifa_Software_Developer_Resume.pdf";
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
@@ -23,14 +24,6 @@ export default function Navbar() {
         </Link>
         <div className="hidden md:flex gap-6 text-sm text-gray-600 dark:text-gray-400">
           <Link
-            to="/"
-            className={`hover:text-blue-600 ${
-              location.pathname === "/" ? "text-blue-600 font-semibold" : ""
-            }`}
-          >
-            Home
-          </Link>
-          <Link
             to="/blog"
             className={`hover:text-blue-600 ${
               location.pathname === "/blog" ? "text-blue-600 font-semibold" : ""
@@ -39,7 +32,7 @@ export default function Navbar() {
             Blog
           </Link>
           <a
-            href="/resume.pdf"
+            href={Resume}
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-blue-600"
