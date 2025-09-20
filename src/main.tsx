@@ -8,7 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 // ✅ Mount React app
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/portfolio">
       <ThemeProvider>
         <App />
       </ThemeProvider>
