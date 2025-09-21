@@ -96,7 +96,8 @@ function StatCard({
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
       className="p-6 rounded-lg bg-white dark:bg-black border border-gray-200 dark:border-gray-800 
-                 flex flex-col items-center justify-center text-center"
+                 flex flex-col items-center justify-center text-center
+                 shadow-md hover:bg-purple-50 dark:hover:bg-purple-900/20"
     >
       <h4 className="text-sm uppercase tracking-wide text-gray-400">{title}</h4>
       <p className={`mt-2 text-3xl font-bold ${accent || "text-purple-500"}`}>
@@ -324,7 +325,7 @@ export default function Stats() {
       )}
 
       {/* Contributions Graph */}
-      <div className="rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 
+      <div className="rounded-lg bg-white dark:bg-black border border-gray-200 dark:border-gray-700 
                        p-6 shadow-sm hover:shadow-md transition mx-auto">
         <GitHubGraphs />
       </div>
