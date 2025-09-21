@@ -5,7 +5,7 @@ export default function Sidebar() {
   const location = useLocation();
 
   return (
-    <aside className="hidden md:flex fixed top-14 left-0 h-[calc(100%-3.5rem)] w-64 bg-gray-50 dark:bg-black border-r border-gray-200 dark:border-gray-800 flex-col z-40 overflow-y-auto">
+    <aside className="hidden md:flex fixed top-14 left-0 h-[calc(100%-3.5rem)] w-64 bg-white dark:bg-black border-r border-gray-200 dark:border-gray-800 flex-col z-40 overflow-y-auto">
       <div className="p-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase mx-auto">
         Sections
       </div>

@@ -99,8 +99,8 @@ function StatCard({
                  flex flex-col items-center justify-center text-center
                  shadow-md hover:bg-purple-50 dark:hover:bg-purple-900/20"
     >
-      <h4 className="text-sm uppercase tracking-wide text-gray-400">{title}</h4>
-      <p className={`mt-2 text-3xl font-bold ${accent || "text-purple-500"}`}>
+      <h4 className="text-sm uppercase tracking-wide  text-gray-900 dark:text-white">{title}</h4>
+      <p className={`mt-2 text-3xl font-bold ${accent || "text-primary"}`}>
         {value}
       </p>
     </motion.div>
@@ -244,14 +244,14 @@ export default function Stats() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
           className="flex flex-col items-center justify-center p-8 
-        bg-black border rounded-2xl border-gray-700 shadow-md
+          rounded-2xl bg-white dark:bg-black border border-gray-200 dark:border-gray-800 shadow-md
          hover:bg-purple-50 dark:hover:bg-purple-900/20"
         >
-          <div className="flex items-center gap-2 mb-4 text-lg font-semibold text-white">
+          <div className="flex items-center gap-2 mb-4 text-lg font-semibold  text-gray-900 dark:text-white">
             <Eye className="w-5 h-5" />
             Total Views
           </div>
-          <div className="text-5xl font-bold text-purple-500">{viewers}</div>
+          <div className="text-5xl font-bold text-primary">{viewers}</div>
           <p className="mt-2 text-sm text-gray-400">
             Unique page visits since 2025
           </p>
@@ -264,10 +264,10 @@ export default function Stats() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
           className="flex flex-col items-center justify-center p-8 
-        bg-black border rounded-2xl border-gray-700 shadow-md
+          rounded-2xl bg-white dark:bg-black border border-gray-200 dark:border-gray-800 shadow-md
          hover:bg-rose-50 dark:hover:bg-rose-900/20"
         >
-          <div className="flex items-center gap-2 mb-4 text-lg font-semibold text-white">
+          <div className="flex items-center gap-2 mb-4 text-lg font-semibold  text-gray-900 dark:text-white">
             <Heart className="w-5 h-5 text-pink-500" />
             Appreciation Count
           </div>
@@ -275,11 +275,16 @@ export default function Stats() {
           <button
             disabled={liked}
             onClick={() => handleClick()}
-            className="mt-4 px-5 py-2 rounded-full border border-gray-600 text-sm text-white flex items-center gap-2 hover:bg-pink-500 hover:text-white transition-all"
+            className={`mt-4 px-5 py-2 rounded-full border border-gray-300 dark:border-gray-800
+              text-sm flex items-center gap-2 transition-all
+              ${liked ? "cursor-not-allowed opacity-70" : ""}
+              text-gray-800 dark:text-gray-200 
+              hover:bg-pink-500 hover:text-white`}
           >
             <Heart className="w-4 h-4" />
             {liked ? "Appreciated!" : "Thank you, much appreciated!"}
           </button>
+
         </motion.div>
       </motion.div>
 
@@ -305,7 +310,7 @@ export default function Stats() {
         >
           <StatCard
             title="Hireable"
-            value={stats.hireable ? "Yes" : "No"}
+            value={stats.hireable ? "YES" : "NO"}
             accent="text-green-500"
           />
           <StatCard title="Public Repositories" value={stats.public_repos} />

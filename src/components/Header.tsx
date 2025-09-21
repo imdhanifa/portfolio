@@ -4,7 +4,7 @@ import { CommandMenu } from "./command/CommandMenu";
 import { Link, useLocation } from "react-router-dom";
 
 
-export default function Navbar() {
+export default function Header() {
   const { theme, setTheme } = useTheme();
   const location = useLocation();
 
