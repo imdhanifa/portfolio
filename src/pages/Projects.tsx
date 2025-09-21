@@ -52,13 +52,11 @@ export default function Projects() {
         {data.projects.map((p) => (
           <motion.div
             key={p.title}
-            variants={{
-              hidden: { opacity: 0, scale: 0.95, y: 30 },
-              visible: { opacity: 1, scale: 1, y: 0 },
-            }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 
-                       p-6 shadow-sm hover:shadow-md transition"
+            whileHover={{ scale: 1.05 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="p-6 rounded-lg bg-white dark:bg-black border border-gray-200 dark:border-gray-800"
           >
             {/* Title */}
             <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">

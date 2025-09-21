@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../store/store";
 import useFetch from "../hooks/useFetch";
 import type { GitHubStats } from "../@types/github";
+import { Eye, Heart } from "lucide-react";
 // ---------------- CONFIG ----------------
 const GITHUB_USERNAME = "imdhanifa"; // your GitHub username
 
@@ -94,7 +95,7 @@ function StatCard({
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
-      className="p-6 rounded-lg shadow-md border border-gray-700 bg-gray-900 
+      className="p-6 rounded-lg bg-white dark:bg-black border border-gray-200 dark:border-gray-800 
                  flex flex-col items-center justify-center text-center"
     >
       <h4 className="text-sm uppercase tracking-wide text-gray-400">{title}</h4>
@@ -107,11 +108,85 @@ function StatCard({
 
 // ---------------- Main Stats Page ----------------
 export default function Stats() {
+  const [viewers, setViewers] = useState<number | null>(null);
+  const [likes, setLikes] = useState<number | null>(null);
+  const [liked, setLiked] = useState(false);
   const { data: portfolio, loading: portfolioLoading, error: portfolioError } =
     useSelector((state: RootState) => state.portfolio);
   const { data: stats, loading, error } = useFetch<GitHubStats>(
     portfolio?.githubProfile ?? ""
   );
+  useEffect(() => {
+    const fetchViewers = async () => {
+      try {
+        const response = await fetch("https://portfolio-api-w6sj.onrender.com/api/portfolio/viewers", {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+            "x-api-key": "hanifa",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setViewers(data.viewers); // ✅ directly extract "viewers"
+      } catch (err) {
+        console.error("Failed to fetch viewers:", err);
+        setViewers(0);
+      }
+    };
+
+    const fetchLikes = async () => {
+      try {
+        const response = await fetch("https://portfolio-api-w6sj.onrender.com/api/portfolio/likes", {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+            "x-api-key": "hanifa",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setLikes(data.likes);
+      } catch (err) {
+        console.error("Failed to fetch viewers:", err);
+        setLikes(0);
+      }
+    };
+
+    fetchViewers();
+    fetchLikes();
+  }, []);
+
+  const handleClick = async () => {
+    try {
+      // Example API call (replace with your endpoint)
+      const res = await fetch("https://portfolio-api-w6sj.onrender.com/api/portfolio/likes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": "hanifa", // replace if needed
+        },
+        body: JSON.stringify({ action: "love" }),
+      });
+
+      if (!res.ok) {
+        throw new Error("API request failed");
+      }
+      const data = await res.json();
+      setLikes(data.likes);
+      setLiked(true);
+    } catch (error) {
+      console.error("Error liking:", error);
+    }
+  };
 
   if (portfolioLoading) {
     return <p className="text-center mt-10">Loading...</p>;
@@ -153,13 +228,59 @@ export default function Stats() {
         Insights and metrics about my GitHub profile
       </motion.h3>
 
-      {/* Contributions Graph */}
-      <div className="mb-12 mx-auto max-w-5xl">
-        <div className="rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 
-                       p-6 shadow-sm hover:shadow-md transition">
-          <GitHubGraphs />
-        </div>
-      </div>
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: {},
+          visible: { transition: { staggerChildren: 0.2 } },
+        }}
+        className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mb-12 mx-auto">
+        {/* Total Views */}
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col items-center justify-center p-8 
+        bg-black border rounded-2xl border-gray-700 shadow-md
+         hover:bg-purple-50 dark:hover:bg-purple-900/20"
+        >
+          <div className="flex items-center gap-2 mb-4 text-lg font-semibold text-white">
+            <Eye className="w-5 h-5" />
+            Total Views
+          </div>
+          <div className="text-5xl font-bold text-purple-500">{viewers}</div>
+          <p className="mt-2 text-sm text-gray-400">
+            Unique page visits since 2025
+          </p>
+        </motion.div>
+
+        {/* Appreciation Count */}
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col items-center justify-center p-8 
+        bg-black border rounded-2xl border-gray-700 shadow-md
+         hover:bg-rose-50 dark:hover:bg-rose-900/20"
+        >
+          <div className="flex items-center gap-2 mb-4 text-lg font-semibold text-white">
+            <Heart className="w-5 h-5 text-pink-500" />
+            Appreciation Count
+          </div>
+          <div className="text-5xl font-bold text-pink-500">{likes}</div>
+          <button
+            disabled={liked}
+            onClick={() => handleClick()}
+            className="mt-4 px-5 py-2 rounded-full border border-gray-600 text-sm text-white flex items-center gap-2 hover:bg-pink-500 hover:text-white transition-all"
+          >
+            <Heart className="w-4 h-4" />
+            {liked ? "Appreciated!" : "Thank you, much appreciated!"}
+          </button>
+        </motion.div>
+      </motion.div>
 
       {/* Profile Stats */}
       {loading ? (
@@ -167,19 +288,19 @@ export default function Stats() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
-          className="text-gray-500 dark:text-gray-400"
+          className="text-gray-500 dark:text-gray-400 mb-12 mx-auto"
         >
           Loading GitHub data...
         </motion.p>
       ) : stats ? (
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto"
           initial="hidden"
           animate="visible"
           variants={{
             hidden: {},
             visible: { transition: { staggerChildren: 0.2 } },
           }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mb-12 mx-auto"
         >
           <StatCard
             title="Hireable"
@@ -201,6 +322,12 @@ export default function Stats() {
           Failed to load GitHub stats
         </motion.p>
       )}
+
+      {/* Contributions Graph */}
+      <div className="rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 
+                       p-6 shadow-sm hover:shadow-md transition mx-auto">
+        <GitHubGraphs />
+      </div>
 
       {/* Navigation Links */}
       <motion.div

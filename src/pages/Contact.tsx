@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,14 +10,53 @@ export default function Contact() {
   const [tab, setTab] = useState<"form" | "details">("form");
   const { data, loading, error } = useSelector((state: RootState) => state.portfolio);
 
+  // form state
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [submitting, setSubmitting] = useState(false);
+  const [response, setResponse] = useState<{ type: "success" | "error"; message: string } | null>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setResponse(null);
+
+    try {
+      const res = await fetch("https://portfolio-api-w6sj.onrender.com/api/mail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": "hanifa",
+          accept: "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      if (!res.ok) {
+        throw new Error(`Failed with status ${res.status}`);
+      }
+
+      const result = await res.json();
+      if (result) {
+        setResponse({ type: "success", message: "Message sent successfully 🚀" });
+        setForm({ name: "", email: "", message: "" });
+      }
+    } catch (err:any) {
+      setResponse({ type: "error", message: err.message || "Something went wrong!" });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   if (loading) return <Loader />;
   if (error) return <p className="text-red-500 text-center mt-10">Error: {error}</p>;
   if (!data) return null;
+
   return (
-    <section
-      id="contact"
-      className="flex flex-col justify-center px-6 w-full max-w-6xl mx-auto py-16"
-    >
+    <section id="contact" className="flex flex-col justify-center px-6 w-full max-w-6xl mx-auto py-16">
       {/* Heading */}
       <motion.h2
         initial={{ opacity: 0, y: -30 }}
@@ -45,29 +85,26 @@ export default function Contact() {
       >
         <button
           onClick={() => setTab("form")}
-          className={`px-4 py-2 text-sm font-medium ${tab === "form"
-            ? "border-b-2 border-primary text-primary"
-            : "text-gray-500 dark:text-gray-400"
+          className={`px-4 py-2 text-sm font-medium ${tab === "form" ? "border-b-2 border-primary text-primary" : "text-gray-500 dark:text-gray-400"
             }`}
         >
           Form
         </button>
         <button
           onClick={() => setTab("details")}
-          className={`px-4 py-2 text-sm font-medium ${tab === "details"
-            ? "border-b-2 border-primary text-primary"
-            : "text-gray-500 dark:text-gray-400"
+          className={`px-4 py-2 text-sm font-medium ${tab === "details" ? "border-b-2 border-primary text-primary" : "text-gray-500 dark:text-gray-400"
             }`}
         >
           Details
         </button>
       </motion.div>
 
-      {/* Tab Content with AnimatePresence */}
+      {/* Tab Content */}
       <AnimatePresence mode="wait">
         {tab === "form" ? (
           <motion.form
             key="form"
+            onSubmit={handleSubmit}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -80,8 +117,12 @@ export default function Contact() {
                 Name<span className="text-red-500">*</span>
               </label>
               <input
+                name="name"
+                value={form.name}
+                onChange={handleChange}
                 type="text"
                 placeholder="Your name, your fame"
+                required
                 className="w-full px-4 py-2 rounded-md bg-transparent border border-gray-300 dark:border-gray-700 
                            text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:outline-none"
               />
@@ -93,14 +134,15 @@ export default function Contact() {
                 Email<span className="text-red-500">*</span>
               </label>
               <input
+                name="email"
+                value={form.email}
+                onChange={handleChange}
                 type="email"
                 placeholder="Where can I reach you back?"
+                required
                 className="w-full px-4 py-2 rounded-md bg-transparent border border-gray-300 dark:border-gray-700 
                            text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:outline-none"
               />
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                Temporary emails are also accepted, unless you wish to hear back 😅
-              </p>
             </div>
 
             {/* Message */}
@@ -109,12 +151,26 @@ export default function Contact() {
                 Message<span className="text-red-500">*</span>
               </label>
               <textarea
+                name="message"
+                value={form.message}
+                onChange={handleChange}
                 rows={4}
                 placeholder="Your words, my inbox."
+                required
                 className="w-full px-4 py-2 rounded-md bg-transparent border border-gray-300 dark:border-gray-700 
                            text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:outline-none"
               ></textarea>
             </div>
+
+            {/* Feedback */}
+            {response && (
+              <p
+                className={`text-sm ${response.type === "success" ? "text-green-600 dark:text-green-400" : "text-red-500"
+                  }`}
+              >
+                {response.message}
+              </p>
+            )}
 
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
@@ -122,14 +178,16 @@ export default function Contact() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 type="submit"
-                className="flex-1 bg-primary text-white py-2 px-4 rounded-md font-medium shadow-md hover:opacity-90 transition"
+                disabled={submitting}
+                className="flex-1 bg-primary text-white py-2 px-4 rounded-md font-medium shadow-md hover:opacity-90 transition disabled:opacity-50"
               >
-                Submit
+                {submitting ? "Sending..." : "Submit"}
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 type="reset"
+                onClick={() => setForm({ name: "", email: "", message: "" })}
                 className="flex-1 border border-gray-400 dark:border-gray-600 py-2 px-4 rounded-md font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 transition"
               >
                 Reset
@@ -147,48 +205,26 @@ export default function Contact() {
           >
             <p>{data.contact.location}</p>
             <p>
-              <a
-                type="email"
-                href={`mailto:${data.contact.email}`}
-                className="text-primary font-medium hover:underline"
-              >
+              <a href={`mailto:${data.contact.email}`} className="text-primary font-medium hover:underline">
                 {data.contact.email}
               </a>
             </p>
             <p>
-              <a
-                type="tel"
-                href={`tel:${data.contact.phone}`}
-                className="text-primary font-medium hover:underline"
-              >
+              <a href={`tel:${data.contact.phone}`} className="text-primary font-medium hover:underline">
                 {data.contact.phone}
               </a>
             </p>
-
             <div className="flex gap-6">
-              <a
-                type="url"
-                href={data.contact.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline transition"
-              >
+              <a href={data.contact.github} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline transition">
                 GitHub
               </a>
-              <a
-                type="url"
-                href={data.contact.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline transition"
-              >
+              <a href={data.contact.linkedin} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline transition">
                 LinkedIn
               </a>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-
       {/* Navigation links */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}

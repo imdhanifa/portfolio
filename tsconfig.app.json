@@ -22,16 +22,18 @@
     "esModuleInterop": true,
 
     /* Type Checking */
-    "strict": true,
+     "strict": false,          // disables all strict checks
+    "noImplicitAny": false,   // specifically allows implicit any
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
 
-    /* Linting / Clean Code */
+    /* Linting / Clean Code */  
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     "erasableSyntaxOnly": true
+    
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

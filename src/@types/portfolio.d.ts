@@ -59,4 +59,6 @@ export interface PortfolioData {
   contact: Contact;
   githubProfile: string;
   resume: string;
+  viewers: number;
+  likes: number;
 }

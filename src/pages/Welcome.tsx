@@ -6,6 +6,15 @@ function TypingText({ text }: { text: string }) {
   const i = useRef(0);
 
   useEffect(() => {
+    fetch("https://portfolio-api-w6sj.onrender.com/api/portfolio/viewers", {
+          method: "POST",
+          headers: {
+            accept: "application/json",
+            "x-api-key": "hanifa",
+          },
+        }).then((res) => res.json())
+        .catch((err) => console.error("Error fetching viewers:", err));
+
     const interval = setInterval(() => {
       if (i.current < text.length) {
         // ✅ only append when valid index
