@@ -1,5 +1,5 @@
 import { useTheme } from "../context/ThemeContext";
-import { Sun, Moon, Github } from "lucide-react";
+import { Sun, Moon, Github, ExternalLink } from "lucide-react";
 import { CommandMenu } from "./command/CommandMenu";
 import { Link, useLocation } from "react-router-dom";
 
@@ -23,14 +23,15 @@ export default function Header() {
           Mohamed Hanifa
         </Link>
         <div className="hidden md:flex gap-6 text-sm text-gray-600 dark:text-gray-400">
-          <Link
-            to="/blog"
-            className={`hover:text-blue-600 ${
-              location.pathname === "/blog" ? "text-blue-600 font-semibold" : ""
-            }`}
+          <a
+            href="https://imdhanifa.github.io/blog/"
+            className="flex items-center gap-2 hover:text-blue-600 font-semibold"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Blog
-          </Link>
+            <ExternalLink className="w-4 h-4" />
+          </a>
         </div>
       </div>
 
