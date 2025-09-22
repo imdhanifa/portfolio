@@ -1,17 +1,16 @@
 import { useTheme } from "../context/ThemeContext";
 import { Sun, Moon, Github, ExternalLink } from "lucide-react";
 import { CommandMenu } from "./command/CommandMenu";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 export default function Header() {
-  const { theme, setTheme } = useTheme();
-  const location = useLocation();
+  const { theme, setTheme } = useTheme()
 
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
-
+git
   return (
     <nav className="fixed top-0 left-0 w-full h-14 z-50 flex items-center justify-between px-6 bg-white dark:bg-black border-b border-gray-200 dark:border-gray-800">
       {/* Left: Brand + Links */}
