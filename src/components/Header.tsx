@@ -10,7 +10,7 @@ export default function Header() {
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
-  
+
   return (
     <nav className="fixed top-0 left-0 w-full h-14 z-50 flex items-center justify-between px-6 bg-white dark:bg-black border-b border-gray-200 dark:border-gray-800">
       {/* Left: Brand + Links */}
@@ -19,9 +19,9 @@ export default function Header() {
           to="/"
           className="font-bold text-lg text-gray-900 dark:text-gray-100 hover:text-blue-600"
         >
-          Mohamed Hanifa
+          Hanifa
         </Link>
-        <div className="hidden md:flex gap-6 text-sm text-gray-600 dark:text-gray-400">
+        <div className="flex gap-6 text-sm text-gray-600 dark:text-gray-400">
           <a
             href="https://imdhanifa.github.io/blog/"
             className="flex items-center gap-2 hover:text-blue-600 font-semibold"
@@ -29,7 +29,7 @@ export default function Header() {
             rel="noopener noreferrer"
           >
             Blog
-            <ExternalLink className="w-4 h-4" />
+            <sup><ExternalLink className="w-3 h-3" /></sup>
           </a>
         </div>
       </div>
