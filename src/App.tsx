@@ -1,9 +1,10 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 // Layout (can also lazy-load if needed)
 import Layout from "./layouts/Layout";
 import Loader from "./components/Loader";
+import { incrementViews } from "./api/portfolio.api";
 
 
 // Lazy load Welcome + NotFound
@@ -21,6 +22,13 @@ const Stats = lazy(() => import("./pages/Stats"));
 
 
 export default function App() {
+   useEffect(() => {
+    const recordView = async () => {
+      await incrementViews().then(() => console.log(""))
+    };
+    recordView();
+  }, []);
+  
   return (
     <Suspense
       fallback={

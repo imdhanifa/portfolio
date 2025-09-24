@@ -7,7 +7,7 @@ import type { GitHubStats } from "../@types/github";
 import { Eye, Heart } from "lucide-react";
 import { CONTACT } from "../utils/constants/contact";
 import { URLS } from "../utils/constants/urls";
-import Loader from "../components/Loader";
+import { getLikes, getViews, incrementLikes } from "../api/portfolio.api";
 
 
 function GitHubGraphs() {
@@ -101,87 +101,26 @@ function StatCard({
 
 
 export default function Stats() {
-  const [viewers, setViewers] = useState<number | null>(null);
-  const [likes, setLikes] = useState<number | null>(null);
-  const [liked, setLiked] = useState(false);
-  const { data: stats, loading, error } = useFetch<GitHubStats>(
-    URLS.GITHUB_API
-  );
+  const [views, setViews] = useState(0);
+  const [likes, setLikes] = useState(0);
+  const [alreadyLiked, setAlreadyLiked] = useState(false);
+
+  const { data: stats, loading } = useFetch<GitHubStats>(URLS.GITHUB_API);
+
   useEffect(() => {
-    const fetchViewers = async () => {
-      try {
-        const response = await fetch(URLS.VIEWS, {
-          method: "GET",
-          headers: {
-            accept: "application/json",
-            "x-api-key": "hanifa",
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
-        }
-
-        const data = await response.json();
-        setViewers(data.viewers);
-      } catch (err) {
-        console.error("Failed to fetch viewers:", err);
-        setViewers(0);
-      }
-    };
-
-    const fetchLikes = async () => {
-      try {
-        const response = await fetch(URLS.LIKES, {
-          method: "GET",
-          headers: {
-            accept: "application/json",
-            "x-api-key": "hanifa",
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
-        }
-
-        const data = await response.json();
-        setLikes(data.likes);
-      } catch (err) {
-        console.error("Failed to fetch likes:", err);
-        setLikes(0);
-      }
-    };
-
-    fetchViewers();
-    fetchLikes();
+    getViews().then((data) => setViews(data.likes));
+    getLikes().then((data) => setLikes(data.likes));
   }, []);
 
   const handleClick = async () => {
     try {
-      
-      const res = await fetch(URLS.LIKES, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": "hanifa", 
-        },
-        body: JSON.stringify({ action: "love" }),
-      });
-
-      if (!res.ok) {
-        throw new Error("API request failed");
-      }
-      const data = await res.json();
+      const data = await incrementLikes();
       setLikes(data.likes);
-      setLiked(true);
+      setAlreadyLiked(data.alreadyLiked);
     } catch (error) {
       console.error("Error liking:", error);
     }
   };
-
-  if (error) {
-    return <Loader/>; 
-  }
 
   return (
     <section
@@ -227,7 +166,7 @@ export default function Stats() {
             <Eye className="w-5 h-5" />
             Total Views
           </div>
-          <div className="text-5xl font-bold text-primary">{viewers}</div>
+          <div className="text-5xl font-bold text-primary">{views}</div>
           <p className="mt-2 text-sm text-gray-400">
             Unique page visits since 2025
           </p>
@@ -248,16 +187,16 @@ export default function Stats() {
           </div>
           <div className="text-5xl font-bold text-pink-500">{likes}</div>
           <button
-            disabled={liked}
+            disabled={alreadyLiked}
             onClick={() => handleClick()}
             className={`mt-4 px-5 py-2 rounded-full border border-gray-300 dark:border-gray-800
               text-sm flex items-center gap-2 transition-all
-              ${liked ? "cursor-not-allowed opacity-70" : ""}
+              ${alreadyLiked ? "cursor-not-allowed opacity-70" : ""}
               text-gray-800 dark:text-gray-200 
               hover:bg-pink-500 hover:text-white`}
           >
             <Heart className="w-4 h-4" />
-            {liked ? "Appreciated!" : "Thank you, much appreciated!"}
+            {alreadyLiked ? "Appreciated!" : "Thank you, much appreciated!"}
           </button>
 
         </motion.div>

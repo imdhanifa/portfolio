@@ -1,22 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { URLS } from "../utils/constants/urls";
 import React from "react";
 
 const TypingText = React.memo(function TypingText({ text }: { text: string }) {
   const [displayed, setDisplayed] = useState("");
   const i = useRef(0);
-
+  
   useEffect(() => {
-    fetch(URLS.VIEWS, {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        "x-api-key": "hanifa",
-      },
-    }).then((res) => res.json())
-      .catch((err) => console.error("Error fetching viewers:", err));
-
     const interval = setInterval(() => {
       if (i.current < text.length) {
         setDisplayed((prev) => prev + text.charAt(i.current));

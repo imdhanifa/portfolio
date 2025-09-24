@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function TypingText({ text }: { text: string }) {
+const TypingText = React.memo(function TypingText({ text }: { text: string }) {
   const [displayed, setDisplayed] = useState("");
   const i = useRef(0);
 
@@ -26,7 +26,7 @@ function TypingText({ text }: { text: string }) {
       </h1>
     </div>
   );
-}
+});
 
 export default function NotFound() {
   const navigate = useNavigate();
