@@ -1,29 +1,21 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
-import type { RootState } from "../store/store";
-import Loader from "../components/Loader";
-
+import { EDUCATION } from "../utils/constants/education"
 
 export default function Education() {
-  const { data, loading, error } = useSelector((state: RootState) => state.portfolio);
-
-  if (loading) return <Loader />;
-  if (error) return <p className="text-red-500 text-center mt-10">Error: {error}</p>;
-  if (!data) return null;
+  const data = EDUCATION;
   return (
     <section
       id="education"
       className="flex flex-col justify-center px-6 w-full max-w-6xl mx-auto py-16"
     >
-      {/* Heading */}
       <motion.h2
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
         className="text-4xl font-bold text-left mb-2 text-gray-900 dark:text-white"
       >
-        Education
+        {data.title}
       </motion.h2>
 
       <motion.h3
@@ -32,11 +24,10 @@ export default function Education() {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="text-2xl font-semibold text-primary mb-6"
       >
-        I learned a lot, but the real learning happens in the code editor!
+        {data.slogan}
       </motion.h3>
 
 
-      {/* Timeline */}
       <motion.div
         className="relative border-l border-gray-300 dark:border-gray-700 max-w-4xl"
         initial="hidden"
@@ -46,7 +37,7 @@ export default function Education() {
           visible: { transition: { staggerChildren: 0.25 } },
         }}
       >
-        {data.education.map((edu, index) => (
+        {data.records.map((edu, index) => (
           <motion.div
             key={index}
             variants={{
@@ -56,7 +47,6 @@ export default function Education() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="mb-10 ml-6"
           >
-            {/* Timeline dot */}
             <motion.span
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
@@ -66,10 +56,9 @@ export default function Education() {
               🎓
             </motion.span>
 
-            {/* Job Content */}
             <div className="flex flex-col">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                {edu.degree} ·{" "}
+                {edu.degree} · 
                 <span className="font-normal text-gray-700 dark:text-gray-300">
                   {edu.institution}
                 </span>
@@ -97,7 +86,7 @@ export default function Education() {
           </motion.div>
         ))}
       </motion.div>
-      {/* Navigation links */}
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

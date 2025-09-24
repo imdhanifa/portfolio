@@ -1,17 +1,15 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import GitHubCalendar from "react-github-calendar";
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
-import type { RootState } from "../store/store";
 import useFetch from "../hooks/useFetch";
 import type { GitHubStats } from "../@types/github";
 import { Eye, Heart } from "lucide-react";
-// ---------------- CONFIG ----------------
-const GITHUB_USERNAME = "imdhanifa"; // your GitHub username
+import { CONTACT } from "../utils/constants/contact";
+import { URLS } from "../utils/constants/urls";
+import Loader from "../components/Loader";
 
-// ---------------- Contributions Graph ----------------
+
 function GitHubGraphs() {
   const [mounted, setMounted] = useState(false);
 
@@ -28,7 +26,6 @@ function GitHubGraphs() {
 
   return (
     <>
-      {/* 📱 Mobile: Last 3 months */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -36,8 +33,8 @@ function GitHubGraphs() {
         className="md:hidden w-full"
       >
         <GitHubCalendar
-          username={GITHUB_USERNAME}
-          transformData={(data: any[]) =>
+          username={CONTACT.username}
+          transformData={(data) =>
             data.filter(
               (d) =>
                 new Date(d.date) >=
@@ -52,7 +49,6 @@ function GitHubGraphs() {
         />
       </motion.div>
 
-      {/* 💻 Desktop: Full year */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -60,8 +56,8 @@ function GitHubGraphs() {
         className="hidden md:block w-full"
       >
         <GitHubCalendar
-          username={GITHUB_USERNAME}
-          transformData={(data: any[]) =>
+          username={CONTACT.username}
+          transformData={(data) =>
             data.filter(
               (d) =>
                 new Date(d.date) >=
@@ -79,15 +75,11 @@ function GitHubGraphs() {
   );
 }
 
-// ---------------- Stat Card ----------------
+
 function StatCard({
   title,
   value,
   accent,
-}: {
-  title: string;
-  value: any;
-  accent?: string;
 }) {
   return (
     <motion.div
@@ -107,20 +99,18 @@ function StatCard({
   );
 }
 
-// ---------------- Main Stats Page ----------------
+
 export default function Stats() {
   const [viewers, setViewers] = useState<number | null>(null);
   const [likes, setLikes] = useState<number | null>(null);
   const [liked, setLiked] = useState(false);
-  const { data: portfolio, loading: portfolioLoading, error: portfolioError } =
-    useSelector((state: RootState) => state.portfolio);
   const { data: stats, loading, error } = useFetch<GitHubStats>(
-    portfolio?.githubProfile ?? ""
+    URLS.GITHUB_API
   );
   useEffect(() => {
     const fetchViewers = async () => {
       try {
-        const response = await fetch("https://portfolio-api-w6sj.onrender.com/api/portfolio/viewers", {
+        const response = await fetch(URLS.VIEWS, {
           method: "GET",
           headers: {
             accept: "application/json",
@@ -133,7 +123,7 @@ export default function Stats() {
         }
 
         const data = await response.json();
-        setViewers(data.viewers); // ✅ directly extract "viewers"
+        setViewers(data.viewers);
       } catch (err) {
         console.error("Failed to fetch viewers:", err);
         setViewers(0);
@@ -142,7 +132,7 @@ export default function Stats() {
 
     const fetchLikes = async () => {
       try {
-        const response = await fetch("https://portfolio-api-w6sj.onrender.com/api/portfolio/likes", {
+        const response = await fetch(URLS.LIKES, {
           method: "GET",
           headers: {
             accept: "application/json",
@@ -157,7 +147,7 @@ export default function Stats() {
         const data = await response.json();
         setLikes(data.likes);
       } catch (err) {
-        console.error("Failed to fetch viewers:", err);
+        console.error("Failed to fetch likes:", err);
         setLikes(0);
       }
     };
@@ -168,12 +158,12 @@ export default function Stats() {
 
   const handleClick = async () => {
     try {
-      // Example API call (replace with your endpoint)
-      const res = await fetch("https://portfolio-api-w6sj.onrender.com/api/portfolio/likes", {
+      
+      const res = await fetch(URLS.LIKES, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key": "hanifa", // replace if needed
+          "x-api-key": "hanifa", 
         },
         body: JSON.stringify({ action: "love" }),
       });
@@ -189,20 +179,8 @@ export default function Stats() {
     }
   };
 
-  if (portfolioLoading) {
-    return <p className="text-center mt-10">Loading...</p>;
-  }
-
-  if (portfolioError) {
-    return (
-      <p className="text-red-500 text-center mt-10">
-        Error: {portfolioError}
-      </p>
-    );
-  }
-
-  if (!portfolio || error) {
-    return null; // still waiting for portfolio data
+  if (error) {
+    return <Loader/>; 
   }
 
   return (
@@ -210,7 +188,6 @@ export default function Stats() {
       id="stats"
       className="flex flex-col justify-center px-6 w-full max-w-6xl mx-auto py-16"
     >
-      {/* Section Title */}
       <motion.h2
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -237,7 +214,6 @@ export default function Stats() {
           visible: { transition: { staggerChildren: 0.2 } },
         }}
         className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mb-12 mx-auto">
-        {/* Total Views */}
         <motion.div
           whileHover={{ scale: 1.05 }}
           initial={{ opacity: 0, scale: 0.9 }}
@@ -257,7 +233,6 @@ export default function Stats() {
           </p>
         </motion.div>
 
-        {/* Appreciation Count */}
         <motion.div
           whileHover={{ scale: 1.05 }}
           initial={{ opacity: 0, scale: 0.9 }}
@@ -288,7 +263,6 @@ export default function Stats() {
         </motion.div>
       </motion.div>
 
-      {/* Profile Stats */}
       {loading ? (
         <motion.p
           initial={{ opacity: 0 }}
@@ -313,11 +287,11 @@ export default function Stats() {
             value={stats.hireable ? "YES" : "NO"}
             accent="text-green-500"
           />
-          <StatCard title="Public Repositories" value={stats.public_repos} />
-          <StatCard title="Followers" value={stats.followers} />
-          <StatCard title="Following" value={stats.following} />
-          <StatCard title="Company" value={stats.company || "-"} />
-          <StatCard title="Location" value={stats.location || "-"} />
+          <StatCard title="Public Repositories" value={stats.public_repos} accent={undefined} />
+          <StatCard title="Followers" value={stats.followers} accent={undefined} />
+          <StatCard title="Following" value={stats.following} accent={undefined} />
+          <StatCard title="Company" value={stats.company || "-"} accent={undefined} />
+          <StatCard title="Location" value={stats.location || "-"} accent={undefined} />
         </motion.div>
       ) : (
         <motion.p
@@ -329,13 +303,11 @@ export default function Stats() {
         </motion.p>
       )}
 
-      {/* Contributions Graph */}
       <div className="rounded-lg bg-white dark:bg-black border border-gray-200 dark:border-gray-700 
                        p-6 shadow-sm hover:shadow-md transition mx-auto">
         <GitHubGraphs />
       </div>
 
-      {/* Navigation Links */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

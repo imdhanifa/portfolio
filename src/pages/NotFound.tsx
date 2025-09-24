@@ -13,7 +13,7 @@ function TypingText({ text }: { text: string }) {
       } else {
         clearInterval(interval);
       }
-    }, 150); // typing speed
+    }, 150); 
 
     return () => clearInterval(interval);
   }, [text]);
@@ -31,9 +31,8 @@ function TypingText({ text }: { text: string }) {
 export default function NotFound() {
   const navigate = useNavigate();
 
-  // Auto redirect after 3s → Welcome or Home
   useEffect(() => {
-    const timer = setTimeout(() => navigate("/"), 3000);
+    const timer = setTimeout(() => navigate("/"), 1500);
     return () => clearTimeout(timer);
   }, [navigate]);
 

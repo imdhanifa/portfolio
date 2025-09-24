@@ -1,29 +1,30 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { URLS } from "../utils/constants/urls";
+import React from "react";
 
-function TypingText({ text }: { text: string }) {
+const TypingText = React.memo(function TypingText({ text }: { text: string }) {
   const [displayed, setDisplayed] = useState("");
   const i = useRef(0);
 
   useEffect(() => {
-    fetch("https://portfolio-api-w6sj.onrender.com/api/portfolio/viewers", {
-          method: "POST",
-          headers: {
-            accept: "application/json",
-            "x-api-key": "hanifa",
-          },
-        }).then((res) => res.json())
-        .catch((err) => console.error("Error fetching viewers:", err));
+    fetch(URLS.VIEWS, {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "x-api-key": "hanifa",
+      },
+    }).then((res) => res.json())
+      .catch((err) => console.error("Error fetching viewers:", err));
 
     const interval = setInterval(() => {
       if (i.current < text.length) {
-        // ✅ only append when valid index
         setDisplayed((prev) => prev + text.charAt(i.current));
         i.current += 1;
       } else {
-        clearInterval(interval); // ✅ stop when done
+        clearInterval(interval);
       }
-    }, 150); // typing speed
+    }, 150);
     return () => clearInterval(interval);
   }, [text]);
 
@@ -35,14 +36,13 @@ function TypingText({ text }: { text: string }) {
       </h1>
     </div>
   );
-}
+})
 
 export default function Welcome() {
   const navigate = useNavigate();
 
-  // Auto redirect after 3s
   useEffect(() => {
-    const timer = setTimeout(() => navigate("/introduction"), 3000);
+    const timer = setTimeout(() => navigate("/introduction"), 1500);
     return () => clearTimeout(timer);
   }, [navigate]);
 

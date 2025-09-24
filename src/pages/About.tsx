@@ -1,28 +1,21 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
-import type { RootState } from "../store/store";
-import Loader from "../components/Loader";
+import { ABOUT } from "../utils/constants/about"
 
 export default function About() {
-  const { data, loading, error } = useSelector((state: RootState) => state.portfolio);
-
-  if (loading) return <Loader />;
-  if (error) return <p className="text-red-500 text-center mt-10">Error: {error}</p>;
-  if (!data) return null;
+  const data = ABOUT;
   return (
     <section
       id="about"
       className="flex flex-col justify-center px-6 w-full max-w-6xl mx-auto py-16"
     >
-      {/* Heading */}
       <motion.h2
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="text-4xl font-bold mb-2 text-gray-900 dark:text-white text-left"
       >
-        {data.about.title}
+        {data.title}
       </motion.h2>
 
       <motion.h3
@@ -31,7 +24,7 @@ export default function About() {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="text-2xl font-semibold text-primary mb-8 text-left"
       >
-        {data.about.slogan}
+        {data.slogan}
       </motion.h3>
 
       {/* Content */}
@@ -41,7 +34,7 @@ export default function About() {
         transition={{ duration: 1, delay: 0.4 }}
         className="space-y-6 text-lg text-gray-700 dark:text-gray-300 leading-relaxed text-left"
       >
-        {data.about.summaries.map((t, i) => (
+        {data.summaries.map((t, i) => (
           <p key={i}
           >
             {t}

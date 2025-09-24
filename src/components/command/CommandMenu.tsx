@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./Button";
 import { CommandDialog } from "./CommandDialog";
@@ -8,13 +7,14 @@ import { CommandItem } from "./CommandItem";
 import { CommandInput } from "./CommandInput";
 import { CommandEmpty } from "./CommandEmpty";
 import { PAGES } from "../../utils/constants/pages";
+import { useEffect, useState } from "react";
 
 export function CommandMenu() {
-  const [open, setOpen] = React.useState(false);
-  const [query, setQuery] = React.useState("");
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
   const navigate = useNavigate();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();

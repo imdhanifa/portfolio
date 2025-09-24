@@ -1,28 +1,21 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
-import type { RootState } from "../store/store";
-import Loader from "../components/Loader";
+import { EXPERIENCE } from "../utils/constants/experience"
 
 export default function Experience() {
-  const { data, loading, error } = useSelector((state: RootState) => state.portfolio);
-
-  if (loading) return <Loader />;
-  if (error) return <p className="text-red-500 text-center mt-10">Error: {error}</p>;
-  if (!data) return null;
+  const data = EXPERIENCE;
   return (
     <section
       id="experience"
       className="flex flex-col justify-center px-6 w-full max-w-6xl mx-auto py-16"
     >
-      {/* Heading */}
       <motion.h2
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
         className="text-4xl font-bold text-left mb-2 text-gray-900 dark:text-white"
       >
-        Experience
+        {data.title}
       </motion.h2>
 
       <motion.h3
@@ -31,24 +24,18 @@ export default function Experience() {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="text-2xl font-semibold text-primary mb-6"
       >
-        You need it to get the job, but the job’s what gives it!
+        {data.slogan}
       </motion.h3>
 
-      {/* Intro paragraph */}
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.9, delay: 0.3 }}
         className="text-lg text-gray-700 dark:text-gray-300 mb-12 max-w-4xl"
       >
-        Throughout my journey as a developer, I’ve worked with cutting-edge technologies
-        while mastering the art of debugging at 2 AM. From building dynamic web apps to
-        solving cryptic errors, my experience has been a blend of structured learning
-        and spontaneous problem-solving. Each role has sharpened my ability to write
-        clean code, collaborate effectively, and—most importantly—fix bugs before they fix me.
+        {data.summary}
       </motion.p>
 
-      {/* Timeline */}
       <motion.div
         className="relative border-l border-gray-300 dark:border-gray-700 max-w-4xl"
         initial="hidden"
@@ -58,7 +45,7 @@ export default function Experience() {
           visible: { transition: { staggerChildren: 0.25 } },
         }}
       >
-        {data.experience.map((job, index) => (
+        {data.records.map((job, index) => (
           <motion.div
             key={index}
             variants={{
@@ -68,7 +55,6 @@ export default function Experience() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="mb-10 ml-6"
           >
-            {/* Timeline dot */}
             <motion.span
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
@@ -78,7 +64,6 @@ export default function Experience() {
               🏢
             </motion.span>
 
-            {/* Job Content */}
             <div className="flex flex-col">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
                 {job.role} – {job.organization}
@@ -108,7 +93,6 @@ export default function Experience() {
         ))}
       </motion.div>
 
-      {/* Navigation links */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

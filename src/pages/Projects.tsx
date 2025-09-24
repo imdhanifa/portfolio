@@ -1,29 +1,22 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
-import type { RootState } from "../store/store";
-import Loader from "../components/Loader";
+import { PROJECTS } from "../utils/constants/projects"
 
 
 export default function Projects() {
-  const { data, loading, error } = useSelector((state: RootState) => state.portfolio);
-
-  if (loading) return <Loader />;
-  if (error) return <p className="text-red-500 text-center mt-10">Error: {error}</p>;
-  if (!data) return null;
+  const  data = PROJECTS;
   return (
     <section
       id="projects"
       className="flex flex-col justify-center px-6 w-full max-w-6xl mx-auto py-16"
     >
-      {/* Heading */}
       <motion.h2
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
         className="text-4xl font-bold text-left mb-2 text-gray-900 dark:text-white"
       >
-        Projects
+        {data.title}
       </motion.h2>
 
       <motion.h3
@@ -32,10 +25,9 @@ export default function Projects() {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="text-2xl font-semibold text-primary mb-6"
       >
-        A lot of ideas, but some are still under construction!
+        {data.slogan}
       </motion.h3>
 
-      {/* Grid */}
       <motion.div
         className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
         initial="hidden"
@@ -49,7 +41,7 @@ export default function Projects() {
           },
         }}
       >
-        {data.projects.map((p) => (
+        {data.records.map((p) => (
           <motion.div
             key={p.title}
             whileHover={{ scale: 1.05 }}
@@ -59,17 +51,14 @@ export default function Projects() {
             className="p-6 rounded-lg bg-white dark:bg-black border border-gray-200 dark:border-gray-800
             shadow-md hover:bg-purple-50 dark:hover:bg-purple-900/20"
           >
-            {/* Title */}
             <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">
               {p.title}
             </h3>
 
-            {/* Description */}
             <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
               {p.description}
             </p>
 
-            {/* Link */}
             <a
               href={p.link}
               target="_blank"
@@ -82,7 +71,6 @@ export default function Projects() {
         ))}
       </motion.div>
 
-      {/* Navigation links */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

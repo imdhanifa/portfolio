@@ -1,16 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { useSelector } from "react-redux";
-import type { RootState } from "../store/store";
-import Loader from "../components/Loader";
+import { Github, Linkedin } from "lucide-react";
+import { CONTACT } from "../utils/constants/contact";
+import { URLS } from "../utils/constants/urls";
 
 export default function Contact() {
   const [tab, setTab] = useState<"form" | "details">("form");
-  const { data, loading, error } = useSelector((state: RootState) => state.portfolio);
+  const data = CONTACT;
 
-  // form state
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
   const [response, setResponse] = useState<{ type: "success" | "error"; message: string } | null>(null);
@@ -25,7 +23,7 @@ export default function Contact() {
     setResponse(null);
 
     try {
-      const res = await fetch("https://portfolio-api-w6sj.onrender.com/api/mail", {
+      const res = await fetch(URLS.MAIL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,30 +39,26 @@ export default function Contact() {
 
       const result = await res.json();
       if (result) {
-        setResponse({ type: "success", message: "Message sent successfully 🚀" });
+        setResponse({ type: "success", message: "Message sent successfully" });
         setForm({ name: "", email: "", message: "" });
       }
-    } catch (err:any) {
+    } catch (err) {
       setResponse({ type: "error", message: err.message || "Something went wrong!" });
     } finally {
       setSubmitting(false);
     }
   };
 
-  if (loading) return <Loader />;
-  if (error) return <p className="text-red-500 text-center mt-10">Error: {error}</p>;
-  if (!data) return null;
-
   return (
     <section id="contact" className="flex flex-col justify-center px-6 w-full max-w-6xl mx-auto py-16">
-      {/* Heading */}
+
       <motion.h2
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
         className="text-4xl font-bold text-left mb-2 text-gray-900 dark:text-white"
       >
-        Contact
+        {data.title}
       </motion.h2>
 
       <motion.h3
@@ -73,10 +67,10 @@ export default function Contact() {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="text-2xl font-semibold text-primary mb-6"
       >
-        Get in touch before I write another line of code!
+        {data.slogan}
       </motion.h3>
 
-      {/* Tabs */}
+
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -99,7 +93,7 @@ export default function Contact() {
         </button>
       </motion.div>
 
-      {/* Tab Content */}
+
       <AnimatePresence mode="wait">
         {tab === "form" ? (
           <motion.form
@@ -111,7 +105,7 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
             className="space-y-6"
           >
-            {/* Name */}
+
             <div>
               <label className="block mb-1 font-medium text-gray-700 dark:text-gray-300">
                 Name<span className="text-red-500">*</span>
@@ -128,7 +122,6 @@ export default function Contact() {
               />
             </div>
 
-            {/* Email */}
             <div>
               <label className="block mb-1 font-medium text-gray-700 dark:text-gray-300">
                 Email<span className="text-red-500">*</span>
@@ -145,7 +138,6 @@ export default function Contact() {
               />
             </div>
 
-            {/* Message */}
             <div>
               <label className="block mb-1 font-medium text-gray-700 dark:text-gray-300">
                 Message<span className="text-red-500">*</span>
@@ -162,7 +154,6 @@ export default function Contact() {
               ></textarea>
             </div>
 
-            {/* Feedback */}
             {response && (
               <p
                 className={`text-sm ${response.type === "success" ? "text-green-600 dark:text-green-400" : "text-red-500"
@@ -172,7 +163,6 @@ export default function Contact() {
               </p>
             )}
 
-            {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -203,29 +193,29 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
             className="text-left space-y-4 text-gray-700 dark:text-gray-300"
           >
-            <p>{data.contact.location}</p>
+            <p>{data.location}</p>
             <p>
-              <a href={`mailto:${data.contact.email}`} className="text-primary font-medium hover:underline">
-                {data.contact.email}
+              <a href={`mailto:${data.email}`} className="text-primary font-medium hover:underline">
+                {data.email}
               </a>
             </p>
             <p>
-              <a href={`tel:${data.contact.phone}`} className="text-primary font-medium hover:underline">
-                {data.contact.phone}
+              <a href={`tel:${data.phone}`} className="text-primary font-medium hover:underline">
+                {data.phone}
               </a>
             </p>
             <div className="flex gap-6">
-              <a href={data.contact.github} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline transition">
-                GitHub
+              <a href={URLS.GITHUB} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline transition">
+                <Github size={15} strokeWidth={1.75} absoluteStrokeWidth /> Github
               </a>
-              <a href={data.contact.linkedin} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline transition">
-                LinkedIn
+              <a href={URLS.LINKEDIN} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline transition">
+                <Linkedin size={16} strokeWidth={1.75} absoluteStrokeWidth /> LinkedIn
               </a>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-      {/* Navigation links */}
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

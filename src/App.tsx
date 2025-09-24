@@ -1,8 +1,5 @@
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import type { AppDispatch } from "./store/store";
-import { fetchPortfolio } from "./store/portfolioSlice";
 
 // Layout (can also lazy-load if needed)
 import Layout from "./layouts/Layout";
@@ -24,12 +21,6 @@ const Stats = lazy(() => import("./pages/Stats"));
 
 
 export default function App() {
-  const dispatch = useDispatch<AppDispatch>();
-
-  useEffect(() => {
-    dispatch(fetchPortfolio());
-  }, []);
-
   return (
     <Suspense
       fallback={

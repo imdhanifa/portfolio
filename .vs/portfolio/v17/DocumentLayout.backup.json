@@ -1,0 +1,190 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "F:\\New folder\\portfolio\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\New folder\\portfolio\\src\\pages\\Stats.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\pages\\Stats.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\New folder\\portfolio\\src\\utils\\constants\\Stats.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\utils\\constants\\Stats.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\New folder\\portfolio\\src\\utils\\constants\\education.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\utils\\constants\\education.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\New folder\\portfolio\\src\\utils\\constants\\about.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\utils\\constants\\about.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\New folder\\portfolio\\src\\utils\\constants\\contact.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\utils\\constants\\contact.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\New folder\\portfolio\\src\\utils\\constants\\experience.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\utils\\constants\\experience.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\New folder\\portfolio\\src\\utils\\constants\\introduction.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\utils\\constants\\introduction.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\New folder\\portfolio\\src\\utils\\constants\\pages.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\utils\\constants\\pages.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\New folder\\portfolio\\src\\utils\\constants\\projects.ts||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\utils\\constants\\projects.ts||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\New folder\\portfolio\\src\\utils\\constants\\skills.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\utils\\constants\\skills.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Stats.tsx",
+              "DocumentMoniker": "F:\\New folder\\portfolio\\src\\pages\\Stats.tsx",
+              "RelativeDocumentMoniker": "src\\pages\\Stats.tsx",
+              "ToolTip": "F:\\New folder\\portfolio\\src\\pages\\Stats.tsx",
+              "RelativeToolTip": "src\\pages\\Stats.tsx",
+              "ViewState": "AgIAAGcAAAAAAAAAAAAQwHQAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-09-24T17:08:16.752Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "stats.ts",
+              "DocumentMoniker": "F:\\New folder\\portfolio\\src\\utils\\constants\\stats.ts",
+              "RelativeDocumentMoniker": "src\\utils\\constants\\stats.ts",
+              "ToolTip": "F:\\New folder\\portfolio\\src\\utils\\constants\\stats.ts",
+              "RelativeToolTip": "src\\utils\\constants\\stats.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-09-24T17:06:05.874Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "education.ts",
+              "DocumentMoniker": "F:\\New folder\\portfolio\\src\\utils\\constants\\education.ts",
+              "RelativeDocumentMoniker": "src\\utils\\constants\\education.ts",
+              "ToolTip": "F:\\New folder\\portfolio\\src\\utils\\constants\\education.ts",
+              "RelativeToolTip": "src\\utils\\constants\\education.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-09-24T17:03:54.173Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "experience.ts",
+              "DocumentMoniker": "F:\\New folder\\portfolio\\src\\utils\\constants\\experience.ts",
+              "RelativeDocumentMoniker": "src\\utils\\constants\\experience.ts",
+              "ToolTip": "F:\\New folder\\portfolio\\src\\utils\\constants\\experience.ts",
+              "RelativeToolTip": "src\\utils\\constants\\experience.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-09-24T17:01:35.856Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "projects.ts",
+              "DocumentMoniker": "F:\\New folder\\portfolio\\src\\utils\\constants\\projects.ts",
+              "RelativeDocumentMoniker": "src\\utils\\constants\\projects.ts",
+              "ToolTip": "F:\\New folder\\portfolio\\src\\utils\\constants\\projects.ts",
+              "RelativeToolTip": "src\\utils\\constants\\projects.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-09-24T17:00:05.756Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "contact.ts",
+              "DocumentMoniker": "F:\\New folder\\portfolio\\src\\utils\\constants\\contact.ts",
+              "RelativeDocumentMoniker": "src\\utils\\constants\\contact.ts",
+              "ToolTip": "F:\\New folder\\portfolio\\src\\utils\\constants\\contact.ts",
+              "RelativeToolTip": "src\\utils\\constants\\contact.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-09-24T16:59:05.935Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "introduction.ts",
+              "DocumentMoniker": "F:\\New folder\\portfolio\\src\\utils\\constants\\introduction.ts",
+              "RelativeDocumentMoniker": "src\\utils\\constants\\introduction.ts",
+              "ToolTip": "F:\\New folder\\portfolio\\src\\utils\\constants\\introduction.ts",
+              "RelativeToolTip": "src\\utils\\constants\\introduction.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-09-24T16:57:51.594Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "about.ts",
+              "DocumentMoniker": "F:\\New folder\\portfolio\\src\\utils\\constants\\about.ts",
+              "RelativeDocumentMoniker": "src\\utils\\constants\\about.ts",
+              "ToolTip": "F:\\New folder\\portfolio\\src\\utils\\constants\\about.ts",
+              "RelativeToolTip": "src\\utils\\constants\\about.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-09-24T16:55:40.252Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "skills.ts",
+              "DocumentMoniker": "F:\\New folder\\portfolio\\src\\utils\\constants\\skills.ts",
+              "RelativeDocumentMoniker": "src\\utils\\constants\\skills.ts",
+              "ToolTip": "F:\\New folder\\portfolio\\src\\utils\\constants\\skills.ts",
+              "RelativeToolTip": "src\\utils\\constants\\skills.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-09-24T16:52:42.453Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "pages.ts",
+              "DocumentMoniker": "F:\\New folder\\portfolio\\src\\utils\\constants\\pages.ts",
+              "RelativeDocumentMoniker": "src\\utils\\constants\\pages.ts",
+              "ToolTip": "F:\\New folder\\portfolio\\src\\utils\\constants\\pages.ts",
+              "RelativeToolTip": "src\\utils\\constants\\pages.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-09-24T16:52:07.01Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
