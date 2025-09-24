@@ -23,12 +23,11 @@ const Stats = lazy(() => import("./pages/Stats"));
 
 export default function App() {
    useEffect(() => {
-    const recordView = async () => {
-      await incrementViews().then(() => console.log(""))
-    };
-    recordView();
-  }, []);
-  
+      const recordView = async () => {
+        await incrementViews().then(() => console.log(""))
+      };
+      recordView();
+    }, []);
   return (
     <Suspense
       fallback={
