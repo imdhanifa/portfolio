@@ -108,7 +108,7 @@ export default function Stats() {
   const { data: stats, loading } = useFetch<GitHubStats>(URLS.GITHUB_API);
 
   useEffect(() => {
-    getViews().then((data) => setViews(data.likes));
+    getViews().then((data) => setViews(data.views));
     getLikes().then((data) => setLikes(data.likes));
   }, []);
 
