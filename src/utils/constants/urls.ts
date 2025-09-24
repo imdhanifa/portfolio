@@ -1,6 +1,6 @@
 export const URLS = {
-    GITHUB: "https://api.github.com/users/imdhanifa",
-    GITHUB_API: "https://github.com/imdhanifa",
+    GITHUB_API: "https://api.github.com/users/imdhanifa",
+    GITHUB: "https://github.com/imdhanifa",
     LINKEDIN: "https://linkedin.com/in/imdhanifa",
     API_BASE: "https://portfolio-api-w6sj.onrender.com/api",
     MAIL: "https://portfolio-api-w6sj.onrender.com/api/mail",
