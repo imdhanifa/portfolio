@@ -5,7 +5,7 @@ export const EXPERIENCE = {
     records: [
         {
             role: "Software Developer",
-            organization: "Knila IT Solutions India Pvt Ltd",
+            organization: "Knila IT Solutions (I) Pvt Ltd",
             period: "Dec 2022 - Present | Coimbatore",
             tasks: [
                 "Developed Deluxe Payment Platform with .NET 8, GraphQL, and JWT authentication.",
